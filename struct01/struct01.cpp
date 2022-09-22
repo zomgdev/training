@@ -50,16 +50,53 @@ int main()
 	//cout << "UINT64_MAX" << UINT64_MAX << endl;
 	//cout << 4 * 1024 * 1024 * 1024 << endl;
 
-	std::ofstream DataFile("./data_file.bin", std::ios_base::binary);
+	std::fstream DataFile("./data_file.bin", DataFile.binary | DataFile.in | DataFile.out | DataFile.trunc);
+	if (!DataFile.is_open()) {
+		cout << "Ooops, ./data_file.bin isnt open." << endl;
 
-	DataFile.write((char*)&strct01.SizeOf, sizeof(strct01.SizeOf));
-	DataFile.write((char*)&strct01.FileUID, sizeof(strct01.FileUID));
-	DataFile.write((char*)&strct01.StorageUID, sizeof(strct01.StorageUID));
-	DataFile.write((char*)&strct01.FileSize, sizeof(strct01.FileSize));
-	DataFile.write((char*)&strct01.FileReplicas, sizeof(strct01.FileReplicas));
+	}
+	else {
+	DataFile.write(reinterpret_cast<char*>(&strct01.SizeOf), sizeof(strct01.SizeOf));
+	DataFile.write(reinterpret_cast<char*>(& strct01.FileUID), sizeof(strct01.FileUID));
+	DataFile.write(reinterpret_cast<char*>(& strct01.StorageUID), sizeof(strct01.StorageUID));
+	DataFile.write(reinterpret_cast<char*>(& strct01.FileSize), sizeof(strct01.FileSize));
+	DataFile.write(reinterpret_cast<char*>(& strct01.FileReplicas), sizeof(strct01.FileReplicas));
 	
-	DataFile.write((char*)strct01.FileName.data(), strct01.FileName.length()+1);
+	DataFile.write(reinterpret_cast<char*>(strct01.FileName.data()), strct01.FileName.length()+1);
+
 	//DataFile.write((char*)strct01.FileName.data(), len);
+
+
+	DataFile.seekp(0);
+	struct01 tSt;
+
+	DataFile.read(reinterpret_cast<char*>(&tSt.SizeOf), 2);
+
+	cout << "Get struct size bytes: " << unsigned(tSt.SizeOf) << endl;
+
+	DataFile.seekp(0);
+	DataFile.read(reinterpret_cast<char*>(&tSt.SizeOf), 2);
+	DataFile.read(reinterpret_cast<char*>(&tSt.FileUID), 8);
+	DataFile.read(reinterpret_cast<char*>(&tSt.StorageUID), 4);
+	DataFile.read(reinterpret_cast<char*>(&tSt.FileSize), 8);
+	DataFile.read(reinterpret_cast<char*>(&tSt.FileReplicas), 1);
+	
+	char *buf = new char[tSt.SizeOf-23];
+
+	DataFile.read(reinterpret_cast<char*>(buf), 7);
+	tSt.FileName = buf;
+	//DataFile >> tSt.FileName;
+
+	// check results
+	cout << "SizeOf       " << tSt.SizeOf << endl;
+	cout << "FileUID      " << tSt.FileUID << endl;
+	cout << "StorageUID   " << tSt.StorageUID << endl;
+	cout << "FileSize     " << tSt.FileSize << endl;
+	cout << "FileReplicas " << unsigned(tSt.FileReplicas) << endl;
+	cout << "FileName     " << tSt.FileName << endl;
+
+
+	}
 
 
 	return 0;

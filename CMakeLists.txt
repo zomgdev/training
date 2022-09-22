@@ -8,4 +8,4 @@ project ("learning")
 # Include sub-projects.
 add_subdirectory ("training")
 add_subdirectory ("struct01")
-
+add_subdirectory ("fstream01")
