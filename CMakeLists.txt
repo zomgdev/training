@@ -9,4 +9,7 @@ project ("learning")
 add_subdirectory ("training")
 add_subdirectory ("struct01")
 add_subdirectory ("fstream01")
-add_subdirectory (daemon01)
+add_subdirectory ("daemon01")
+add_subdirectory ("socket_server01")
+
+
