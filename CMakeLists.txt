@@ -12,5 +12,6 @@ add_subdirectory ("fstream01")
 add_subdirectory ("daemon01")
 add_subdirectory ("socket_server01")
 add_subdirectory ("server01")
+add_subdirectory ("server02")
 
 

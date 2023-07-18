@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="RemoteTargetsManager">
+    <option name="projectDefaultTargetUuid" value="1e9470af-b622-4f67-93e2-09bb67c444a5" />
+    <targets>
+      <target name="orangepi@192.168.2.137:22" type="ssh/sftp" uuid="1e9470af-b622-4f67-93e2-09bb67c444a5">
+        <config>
+          <option name="projectRootOnTarget" value="/home/orangepi/wrk/training" />
+          <option name="serverName" value="orangepi@192.168.2.137:22 password" />
+          <option name="useRsync" value="true" />
+        </config>
+      </target>
+    </targets>
+  </component>
+</project>
