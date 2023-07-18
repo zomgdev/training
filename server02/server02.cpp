@@ -1,7 +1,3 @@
-//
-// Created by Mikhail Butalin on 18.07.2023.
-//
-
 #include "server02.h"
 
 
