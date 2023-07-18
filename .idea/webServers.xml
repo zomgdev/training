@@ -3,7 +3,7 @@
   <component name="WebServers">
     <option name="servers">
       <webServer id="b72de6f3-3f0e-4cbc-aa01-6fa24cdbc4be" name="opi504" url="">
-        <fileTransfer rootFolder="/opt/skynet" accessType="SFTP" host="192.168.2.137" port="22" sshConfigId="10f6466f-20d6-4266-a8e4-ae7ef1ac0bf9" sshConfig="orangepi@192.168.2.137:22 password">
+        <fileTransfer rootFolder="/home/orangepi/wrk" accessType="SFTP" host="192.168.2.137" port="22" sshConfigId="10f6466f-20d6-4266-a8e4-ae7ef1ac0bf9" sshConfig="orangepi@192.168.2.137:22 password">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" isUseRsync="true" />
           </advancedOptions>
