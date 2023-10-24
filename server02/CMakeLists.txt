@@ -4,7 +4,7 @@
 cmake_minimum_required (VERSION 3.8)
 
 
-add_executable (server02 "server02.cpp" "server02.h")
+add_executable (server02 "server02.cpp" "server02.h" ../scratches/scratches.cpp ../scratches/scratches.h)
 
 add_executable (server02cli "server02cli.cpp" "server02cli.h" )
 

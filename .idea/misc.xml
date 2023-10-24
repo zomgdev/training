@@ -5,6 +5,7 @@
   </component>
   <component name="CidrRootsConfiguration">
     <sourceRoots>
+      <file path="$PROJECT_DIR$/scratches" />
       <file path="$PROJECT_DIR$/server02" />
       <file path="$PROJECT_DIR$/struct01" />
     </sourceRoots>
