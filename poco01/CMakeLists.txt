@@ -3,7 +3,7 @@
 #
 cmake_minimum_required (VERSION 3.8)
 
-
+find_package(Poco REQUIRED Foundation Data )
 
 
 
@@ -15,8 +15,13 @@ if (CMAKE_VERSION VERSION_GREATER 3.12)
 endif()
 
 
-find_package(Poco CONFIG REQUIRED Data)
-include_directories("/usr/local/include")
-#target_link_libraries(poco01 "/usr/local/lib")
 
-# TODO: Add tests and install targets if needed.
+#set(POCO_PREFIX      "/usr/local") # the directory containing "include" and "lib"
+#set(POCO_INCLUDE_DIR "${POCO_PREFIX}/include")
+#set(POCO_LIB_DIR     "${POCO_PREFIX}/lib")
+
+# set the include path for the app
+#target_include_directories(poco01 PUBLIC "${POCO_INCLUDE_DIR}")
+# link the app against POCO
+target_link_libraries(poco01 PRIVATE Poco::Data)
+#target_link_directories(poco01 PUBLIC "/usr/local")
