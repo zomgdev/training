@@ -18,14 +18,14 @@ add_executable (poco01 "poco01.cpp" "poco01.h")
 
 
 
-#set(POCO_PREFIX      "/usr/local") # the directory containing "include" and "lib"
-#set(POCO_INCLUDE_DIR "${POCO_PREFIX}/include")
-#set(POCO_LIB_DIR     "${POCO_PREFIX}/lib")
+set(POCO_PREFIX      "/usr/local") # the directory containing "include" and "lib"
+set(POCO_INCLUDE_DIR "${POCO_PREFIX}/include")
+set(POCO_LIB_DIR     "${POCO_PREFIX}/lib")
 #set(POCO_LIBS
 #        "${POCO_LIB_DIR}/libPocoData.dylib"
 #        "${POCO_LIB_DIR}/libPocoFoundation.dylib")
 
-#target_include_directories(poco01 PRIVATE "${POCO_INCLUDE_DIR}")
+target_include_directories(poco01 PRIVATE "${POCO_INCLUDE_DIR}")
 #target_link_libraries(poco01 ${POCO_LIBS})
 
 target_link_libraries(poco01 Poco::Foundation Poco::Data Poco::DataSQLite)
