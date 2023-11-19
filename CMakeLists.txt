@@ -15,5 +15,6 @@ add_subdirectory ("server01")
 #add_subdirectory ("server02")
 add_subdirectory ("scratches")
 add_subdirectory ("poco01")
+add_subdirectory ("poco02")
 
 

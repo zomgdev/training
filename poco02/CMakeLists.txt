@@ -1,6 +1,6 @@
 cmake_minimum_required (VERSION 3.8)
 
-find_package(Poco REQUIRED Data Foundation PostgreSQL )
+find_package(Poco REQUIRED Data Foundation DataPostgreSQL)
 
 
 
@@ -23,4 +23,4 @@ set(POCO_LIB_DIR     "${POCO_PREFIX}/lib")
 target_include_directories(poco02 PRIVATE "${POCO_INCLUDE_DIR}")
 #target_link_libraries(poco01 ${POCO_LIBS})
 
-target_link_libraries(poco02 Poco::Foundation Poco::Data Poco::PostgreSQL)
+target_link_libraries(poco02 Poco::Foundation Poco::Data Poco::DataPostgreSQL)
