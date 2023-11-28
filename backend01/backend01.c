@@ -35,7 +35,7 @@ int main(void)
     struct sockaddr_storage remoteaddr; // client address
     socklen_t addrlen;
 
-    char buf[256];    // buffer for client data
+    char buf[256];    // buffer for client ata
     int nbytes;
 
     char remoteIP[INET6_ADDRSTRLEN];
