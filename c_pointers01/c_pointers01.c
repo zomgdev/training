@@ -31,13 +31,15 @@ int *get_phones_list(int numbers_count){
 }
 int main(int argc, char **argv)
 {
-    // todo:
+    // todo
+    // Задача - разобраться с работой указателей.
+    // 1. Как размещать данные в заранее зарезервированном объеме памяти.
+    // 2. Как наращивать память при добавлении данных
+    // 3. Выделение непрерывного участка памяти
 
-    int number_rate         = 999999;
-    
-    // Сначала генерируем тестовый набор данных. Пусть это будет последовательность телефонных номеров, размером 1МБ.
-    int *phones_list = get_phones_list(1000);
-    
-    //printf("long = %d\n", sizeof(long));
+    int user_input = 0;
+
+    printf("Press enter...");
+    sscanf("%d", &user_input);
 
 }
