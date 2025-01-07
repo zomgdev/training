@@ -1,0 +1,2 @@
+int PHONE_NUMBER_SIZE        = 7;
+int PHONE_NUMBER_PREFIX_SIZE = 3;
