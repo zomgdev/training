@@ -6,46 +6,49 @@
 #include <malloc.h>
 #include <time.h>
 #include <math.h>
+#include <fcntl.h>
 
 #include "c_pointers01.h"
 
-int *get_phones_list(int numbers_count){
-
-    int phone_number_value  = 0;
-    int phone_number_size   = 7;
-
-    int *phones_list = malloc(numbers_count*4);
-
-    // инициализация rand
-    srand(time(0));
-    for(int nums_counter = 0; nums_counter < numbers_count; nums_counter++)
+// Просто читаем unsigned int из /dev/urandom
+// .. но это не точно
+unsigned int get_random_int(){
+    unsigned char *random_number = malloc(4);
+    unsigned int  *random_int;// = malloc(4);
+    FILE *urandom_file;
+    
+    if( (urandom_file = fopen("/dev/urandom", "r")) == NULL)
     {
-    phones_list[numbers_count] = rand()%10000000000+1;
-        
-        while (phones_list[numbers_count] < 1000000000 || phones_list[numbers_count] > 9999999999  )
-        {
-            phones_list[numbers_count] = rand()%10000000000+1;
-        }
-     
-        // printf("random number: %d \nsize: %d\n", phone_number_value, sizeof(phone_number_value));
-        printf("%d, %d\n", phones_list[numbers_count], phones_list[numbers_count]);
+        printf("Opening file error\n\n\n");
+        exit(1);
     }
 
-    return phones_list; 
-}
-    // Генератор псевдослучайного беззнакового целого
-    // инициализация rand
-    srand(time(NULL));
+    int bytes_read = fread(random_number, 1, 4, urandom_file) ;
+    
+    printf("bytes readed: %d\n", bytes_read);
+    for(char i=0;i<4;i++)
+        printf("i: %d\taddr: %p\t value: %d\n", i, random_number+i, *(random_number+i));
+    
+    fclose(urandom_file);
+    // for(int i=0;i<4;i++) printf("%d ", *random_bytes[i]);
+    // printf("\n");
+    // printf("%d %d %d %d\n", *random_bytes[0], *random_bytes[1], *random_bytes[2], *random_bytes[3]);
+    // sscanf(random_bytes, "%d", &random_number);
+    random_int = (int*)(random_number+0);
 
-    for(int i=0;i<number_size;i++) multiplier*=10;
-    srand(time(NULL));
-    int random_number = rand()%multiplier+1;
-    while (random_number < (multiplier/10) || random_number > (multiplier-1) ) {
-        random_number = rand()%multiplier+1;
-    }
-    return random_number;
+    printf("addr: %ls\trandom_int = %d\n", random_int, *random_int);
+    return *random_int;
 }
 
+int test()
+{
+    int test;
+    test = 124;
+
+    printf("test called: %d\n", test);
+    
+    return test;
+}
 
 int main(int argc, char **argv)
 {
@@ -55,38 +58,78 @@ int main(int argc, char **argv)
     // 2. Как наращивать память при добавлении данных
     // 3. Выделение непрерывного участка памяти
 
+    // Телефонный номер:
+    // префикс - 3
+    // тело    - 7
+    // если рандомное число меньше 7 знаков, то дополняем нулями
+
     // параметры акивного терминала
     struct winsize w;
 
     // cli и все что с этим связано
     char cli_str[255];
 
-    // ээээксперименты!
-    // счетчик номеров
-    int phone_index = 0;
+
     // структура для хранения номеров
     struct PersonalData *testData = malloc(sizeof(struct PersonalData));
+
 
     if(!testData)
         perror("malloc error");
     
-    // printf("%p\n", testData);
-    // printf("%ld\n", sizeof(*testData));
-    // printf("%d\n", testData->phone_number);
-    // printf("%d\n", testData->phone_prefix);
-    for(int i=0;i<4000000;i++)
-    {
-    testData->phone_index = i;
-    testData->phone_prefix = get_random_number(3);
-    testData->phone_number = get_random_number(7);
-    printf("%d. ", testData->phone_index);
-    printf("(%d)", testData->phone_prefix);
-    printf("%d\n", testData->phone_number);
+    // Размеры
+    printf("Sizing...\n");
+    printf("char          - %lu\t unsigned char      - %lu\n", sizeof(char), sizeof(unsigned char));
+    printf("int           - %lu\t unsigned int       - %lu\t short int       - %lu\n", sizeof(int),  sizeof(unsigned int), sizeof(short int));
+    printf("long          - %lu\t unsigned long      - %lu\n", sizeof(long), sizeof(unsigned long));
+    printf("long long     - %lu\t unsigned long long - %lu\n", sizeof(long long), sizeof(unsigned long long));
+    printf("unsigned      - %lu\n", sizeof(unsigned));
+    printf("\n\n");
 
-    }
-    exit;
+    // Просто набор чисел для тестирования endians.
+    unsigned int TestNums[] = {0,1,255,256,65535,65536,16777216,482976324};
+    char *filename[] = {"./testfile.bin"};
+    // Открываем файл на запись
+    FILE *testfile = fopen("./testfile.bin", "w+");
+    fwrite(&TestNums, 4, 8, testfile);
+    fclose(testfile);
 
+    // Тест преобразования массива char в int
+    // char *charr[] = {255,255,255,0};
+    unsigned char *charvar = malloc(4); 
+    unsigned int  *intvar  = malloc(4);
+
+    *intvar = 256;
+    *(charvar+0) = 255;
+    *(charvar+1) = 255;
+    *(charvar+2) = 0;
+    *(charvar+3) = 0;
+
+    // printf("charr    = %p\n", charr);
+    // printf("*charr   = %hhn\n", *charr);
+    // printf("sizeof(charr) %lu\n", sizeof(charr));
     
+    printf("charvar\n");
+
+    for(char i=0; i<4; i++) 
+        printf("charvar: %p\t *charvar + %d = %d\n", charvar+i, i, *(charvar+i));
+
+    printf("intvar  = %p\n", intvar);
+    printf("*intvar  = %d\n", *intvar);
+    printf("sizeof(intvar) %lu\n", sizeof(*intvar));
+
+    *intvar = *((int *)(charvar+0));
+    
+    printf("char2int - %d\n\n", *intvar);
+    // Тестирование самописной функции рандома
+    unsigned int dd;
+    // *dd = test();
+
+    dd = get_random_int();
+    printf("> %u\n\n", dd);
+    
+   
+
     // memory_buffer[10] = 123;
     // for(int i=0; i<100; i++)
     // {
