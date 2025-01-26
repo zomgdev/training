@@ -9,7 +9,7 @@
 #include <fcntl.h>
 
 #include "c_pointers01.h"
-
+#include "tools.h"
 // Просто читаем unsigned int из /dev/urandom
 // .. но это не точно
 unsigned int get_random_int(){
@@ -30,10 +30,7 @@ unsigned int get_random_int(){
         printf("i: %d\taddr: %p\t value: %d\n", i, random_number+i, *(random_number+i));
     
     fclose(urandom_file);
-    // for(int i=0;i<4;i++) printf("%d ", *random_bytes[i]);
-    // printf("\n");
-    // printf("%d %d %d %d\n", *random_bytes[0], *random_bytes[1], *random_bytes[2], *random_bytes[3]);
-    // sscanf(random_bytes, "%d", &random_number);
+
     random_int = (int*)(random_number+0);
 
     printf("addr: %ls\trandom_int = %d\n", random_int, *random_int);
@@ -77,14 +74,6 @@ int main(int argc, char **argv)
     if(!testData)
         perror("malloc error");
     
-    // Размеры
-    printf("Sizing...\n");
-    printf("char          - %lu\t unsigned char      - %lu\n", sizeof(char), sizeof(unsigned char));
-    printf("int           - %lu\t unsigned int       - %lu\t short int       - %lu\n", sizeof(int),  sizeof(unsigned int), sizeof(short int));
-    printf("long          - %lu\t unsigned long      - %lu\n", sizeof(long), sizeof(unsigned long));
-    printf("long long     - %lu\t unsigned long long - %lu\n", sizeof(long long), sizeof(unsigned long long));
-    printf("unsigned      - %lu\n", sizeof(unsigned));
-    printf("\n\n");
 
     // Просто набор чисел для тестирования endians.
     unsigned int TestNums[] = {0,1,255,256,65535,65536,16777216,482976324};
@@ -129,13 +118,6 @@ int main(int argc, char **argv)
     printf("> %u\n\n", dd);
     
    
-
-    // memory_buffer[10] = 123;
-    // for(int i=0; i<100; i++)
-    // {
-    //     printf("%d\t %p %d\n", i, *memory_buffer+i, &memory_buffer[i]);
-    // }
-
     // выводим дампик памяти
     // show_mem(&memory_buffer);
 
