@@ -10,32 +10,7 @@
 
 #include "c_pointers01.h"
 #include "tools.h"
-// Просто читаем unsigned int из /dev/urandom
-// .. но это не точно
-unsigned int get_random_int(){
-    unsigned char *random_number = malloc(4);
-    unsigned int  *random_int;// = malloc(4);
-    FILE *urandom_file;
-    
-    if( (urandom_file = fopen("/dev/urandom", "r")) == NULL)
-    {
-        printf("Opening file error\n\n\n");
-        exit(1);
-    }
 
-    int bytes_read = fread(random_number, 1, 4, urandom_file) ;
-    
-    printf("bytes readed: %d\n", bytes_read);
-    for(char i=0;i<4;i++)
-        printf("i: %d\taddr: %p\t value: %d\n", i, random_number+i, *(random_number+i));
-    
-    fclose(urandom_file);
-
-    random_int = (int*)(random_number+0);
-
-    printf("addr: %ls\trandom_int = %d\n", random_int, *random_int);
-    return *random_int;
-}
 
 int test()
 {
@@ -112,12 +87,23 @@ int main(int argc, char **argv)
     printf("char2int - %d\n\n", *intvar);
     // Тестирование самописной функции рандома
     unsigned int dd;
+    unsigned long random_number;
     // *dd = test();
 
-    dd = get_random_int();
+    dd = get_random_number(4);
     printf("> %u\n\n", dd);
     
+    // Контроль валидности номеров 
+    // int не вмещает 10 знаков, начинающиеся с цифры 9. Код страны не рассматривается.
+    // Пример: 999 786-45-32
    
+
+    while (random_number < 10000000000 && random_number > 999999999) {
+        random_number = get_random_number(8);
+        printf("%lu\n", random_number);
+    }
+    
+
     // выводим дампик памяти
     // show_mem(&memory_buffer);
 

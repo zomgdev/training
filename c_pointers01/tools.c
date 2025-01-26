@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 // Мелкие вспомогательные функции
 void print_sizing()
@@ -15,8 +16,8 @@ void print_sizing()
 
 // Просто читаем unsigned int из /dev/urandom
 // .. но это не точно
-unsigned int get_random_int(){
-    unsigned char *random_number = malloc(4);
+void* get_random_number(char num_size){
+    unsigned char *random_number = malloc(num_size);
     unsigned int  *random_int;// = malloc(4);
     FILE *urandom_file;
     
