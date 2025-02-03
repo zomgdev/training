@@ -17,8 +17,7 @@ void print_sizing()
 // Просто читаем unsigned int из /dev/urandom
 // .. но это не точно
 void* get_random_number(char num_size){
-    unsigned char *random_number = malloc(num_size);
-    unsigned int  *random_int;// = malloc(4);
+    void *random_number = malloc(num_size);
     FILE *urandom_file;
     
     if( (urandom_file = fopen("/dev/urandom", "r")) == NULL)
@@ -27,16 +26,16 @@ void* get_random_number(char num_size){
         exit(1);
     }
 
-    int bytes_read = fread(random_number, 1, 4, urandom_file) ;
+    int bytes_read = fread(random_number, 1, num_size, urandom_file) ;
     
     printf("bytes readed: %d\n", bytes_read);
-    for(char i=0;i<4;i++)
+    for(char i=0;i<num_size;i++)
         printf("i: %d\taddr: %p\t value: %d\n", i, random_number+i, *(random_number+i));
     
     fclose(urandom_file);
 
-    random_int = (int*)(random_number+0);
+    // random_int = random_number;
 
-    printf("addr: %ls\trandom_int = %d\n", random_int, *random_int);
-    return *random_int;
+    printf("addr: %p\trandom_number = %ld\n", random_number, *((unsigned long*)(random_number)));
+    return random_number;
 }

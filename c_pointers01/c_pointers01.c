@@ -86,22 +86,22 @@ int main(int argc, char **argv)
     
     printf("char2int - %d\n\n", *intvar);
     // Тестирование самописной функции рандома
-    unsigned int dd;
+    unsigned long *dd;
     unsigned long random_number;
     // *dd = test();
 
-    dd = get_random_number(4);
-    printf("> %u\n\n", dd);
+    dd = *((unsigned long*)get_random_number(8));
+    printf("> addr: %p %lu\n\n", dd, *dd);
     
     // Контроль валидности номеров 
     // int не вмещает 10 знаков, начинающиеся с цифры 9. Код страны не рассматривается.
     // Пример: 999 786-45-32
    
 
-    while (random_number < 10000000000 && random_number > 999999999) {
-        random_number = get_random_number(8);
-        printf("%lu\n", random_number);
-    }
+    // while (random_number < 10000000000 && random_number > 999999999) {
+    //     random_number = get_random_number(8);
+    //     printf("%lu\n", random_number);
+    // }
     
 
     // выводим дампик памяти
