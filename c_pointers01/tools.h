@@ -1,3 +1,3 @@
 void print_sizing();
-unsigned int get_random_number(char num_size);
+unsigned int get_random_number();
 
