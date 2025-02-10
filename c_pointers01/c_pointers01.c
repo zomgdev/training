@@ -62,7 +62,7 @@ int main(int argc, char **argv)
     unsigned char *charvar = malloc(4); 
     unsigned int  *intvar  = malloc(4);
 
-    *intvar = 256;
+    *intvar      = 256;
     *(charvar+0) = 255;
     *(charvar+1) = 255;
     *(charvar+2) = 0;
@@ -89,7 +89,7 @@ int main(int argc, char **argv)
     unsigned long random_number;
     // *dd = test();
 
-    dd = *((unsigned long*)get_random_number(8));
+    dd = (unsigned long *)get_random_number(8);
     printf("> addr: %p %lu\n\n", dd, *dd);
     
     // Контроль валидности номеров 

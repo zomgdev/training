@@ -30,7 +30,7 @@ void* get_random_number(char num_size){
     
     printf("bytes readed: %d\n", bytes_read);
     for(char i=0;i<num_size;i++)
-        printf("i: %d\taddr: %p\t value: %d\n", i, random_number+i, *(random_number+i));
+        printf("i: %d\taddr: %p\t value: %d\n", i, random_number+i, *((char *)(random_number+i));
     
     fclose(urandom_file);
 
