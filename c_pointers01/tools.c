@@ -16,7 +16,7 @@ void print_sizing()
 
 // Просто читаем unsigned int из /dev/urandom
 // .. но это не точно
-void* get_random_number(char num_size){
+unsigned long get_random_number(char num_size){
     void *random_number = malloc(num_size);
     FILE *urandom_file;
     
