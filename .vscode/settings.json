@@ -3,7 +3,13 @@
         "stdio.h": "c",
         "math.h": "c",
         "*.tcc": "c",
-        "fstream": "c"
+        "fstream": "c",
+        "fcntl.h": "c",
+        "tools.h": "c",
+        "cstdlib": "c",
+        "memory_resource": "c",
+        "memory": "c",
+        "new": "c"
     },
     "makefile.configureOnOpen": false
 }
