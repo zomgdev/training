@@ -21,6 +21,16 @@ int test()
     return test;
 }
 
+void *test_void() {
+    void *returning_value = malloc(8);
+    *(unsigned long*)(returning_value) = 1;
+    for(char i = 0; i < 8; i++){
+        printf("> %d\t%p\t%d\n", i, returning_value+i, *((char *)(returning_value+i)));
+    }
+    return (void*)returning_value;
+}
+
+
 int main(int argc, char **argv)
 {
     // todo
@@ -85,13 +95,19 @@ int main(int argc, char **argv)
     
     printf("char2int - %d\n\n", *intvar);
     // Тестирование самописной функции рандома
-    unsigned long *dd;
-    unsigned long random_number;
-    // *dd = test();
 
-    dd = (unsigned long *)get_random_number(8);
-    printf("> addr: %p %lu\n\n", dd, *dd);
+    print_sizing();
+
+    void *dd;
+    dd = get_random_number(8);
+
+    printf("> addr: %p \n", dd);
+    printf("> value: %lu \n\n", *((unsigned long*)(dd)));
     
+    for( char i = 0; i < 8; i++ ) {
+        printf("i: %d\taddr: %p\t value: %d\n", i, dd+i, *((unsigned char *)(dd+i)));
+    }
+
     // Контроль валидности номеров 
     // int не вмещает 10 знаков, начинающиеся с цифры 9. Код страны не рассматривается.
     // Пример: 999 786-45-32
@@ -117,6 +133,7 @@ int main(int argc, char **argv)
     // }
 
 }
+
 // void show_mem(char *mem_pointer)
 // {
 //     struct winsize w; 
